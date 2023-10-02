@@ -6,13 +6,15 @@ func _ready():
 	pass # Replace with function body.
 
 func _input(event):
-	if event is InputEventMouseButton:
+	#if event is InputEventMouseButton:
 	#if event.is_action_pressed('left_click'):
-		spawn(get_parent().get_arena_radius())
+	#	spawn(get_parent().get_arena_radius())
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+	
 
 var enemy = preload("res://Scenes/enemy.tscn")
 
@@ -29,7 +31,11 @@ func spawn(r):
 	x = x / (sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2))) * r
 	y = y / (sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2))) * r
 	z = z / (sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2))) * r
-	print(x,y,z)
+	#print(x,y,z)
 	var new_enemy = enemy.instantiate()
 	add_child(new_enemy)
 	new_enemy.set_pos(x,y,z)
+
+
+func _on_timer_timeout():
+	spawn(get_parent().get_arena_radius())

@@ -4,13 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://df7p0p57nimu6" path="res://Scenes/player.tscn" id="1_kxres"]
 [ext_resource type="PackedScene" uid="uid://clc3djq4c2mg3" path="res://Scenes/pause_menu.tscn" id="2_a4n1s"]
 [ext_resource type="Script" path="res://scripts/Spawner.gd" id="2_wd7oh"]
-[ext_resource type="Shader" path="res://scripts/sphere.gdshader" id="3_fclyr"]
+[ext_resource type="Shader" path="res://scripts/arena.gdshader" id="3_fu4sr"]
 [ext_resource type="Script" path="res://scripts/Arena.gd" id="3_r10hw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j6ynk"]
 render_priority = 0
-shader = ExtResource("3_fclyr")
-shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader = ExtResource("3_fu4sr")
 
 [node name="Level" type="Node3D"]
 process_mode = 3
@@ -20,11 +19,13 @@ script = ExtResource("1_c05l0")
 process_mode = 1
 script = ExtResource("2_wd7oh")
 
+[node name="Timer" type="Timer" parent="Spawner"]
+autostart = true
+
 [node name="Arena" type="CSGSphere3D" parent="."]
 process_mode = 1
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 flip_faces = true
-radius = 5.0
 smooth_faces = false
 material = SubResource("ShaderMaterial_j6ynk")
 script = ExtResource("3_r10hw")
@@ -32,10 +33,61 @@ script = ExtResource("3_r10hw")
 [node name="Player" parent="." instance=ExtResource("1_kxres")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-visible = false
 light_energy = 5.0
 
 [node name="Pause_Menu" parent="." instance=ExtResource("2_a4n1s")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.975041, 0.222025, 0, -0.222025, 0.975041, 0, 1.54518, 3.40798)
+transform = Transform3D(1, 0, 0, 0, 0.177875, 0.984053, 0, -0.984053, 0.177875, 0, 1.54518, 0.246563)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.678431)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -241.0
+offset_top = -58.9999
+offset_right = -149.0
+offset_bottom = -32.9999
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+text = "GAME OVER"
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 433.0
+offset_right = 687.0
+offset_bottom = 534.0
+color = Color(0.360784, 0.360784, 0.360784, 1)
+
+[node name="Button" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -109.0
+offset_top = 113.0
+offset_right = -37.0
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+text = "Restart?"
+
+[connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
+[connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]
