@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://df7p0p57nimu6"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_8netm"]
+[ext_resource type="Texture2D" uid="uid://7ufcn62t5b1n" path="res://assets/crosshair.png" id="2_x1ipo"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cc3qf"]
+
+[node name="Player" type="Node3D"]
+process_mode = 1
+script = ExtResource("1_8netm")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_cc3qf")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="Crosshair" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_x1ipo")
