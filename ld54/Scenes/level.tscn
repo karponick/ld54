@@ -1,27 +1,41 @@
-[gd_scene load_steps=6 format=3 uid="uid://cr31ixtug4wet"]
+[gd_scene load_steps=8 format=3 uid="uid://cr31ixtug4wet"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_c05l0"]
 [ext_resource type="PackedScene" uid="uid://df7p0p57nimu6" path="res://Scenes/player.tscn" id="1_kxres"]
 [ext_resource type="PackedScene" uid="uid://clc3djq4c2mg3" path="res://Scenes/pause_menu.tscn" id="2_a4n1s"]
+[ext_resource type="Script" path="res://scripts/Spawner.gd" id="2_wd7oh"]
 [ext_resource type="Shader" path="res://scripts/sphere.gdshader" id="3_fclyr"]
+[ext_resource type="Script" path="res://scripts/Arena.gd" id="3_r10hw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j6ynk"]
 render_priority = 0
 shader = ExtResource("3_fclyr")
+shader_parameter/bg_color = Color(0, 0, 0, 1)
 
 [node name="Level" type="Node3D"]
 process_mode = 3
 script = ExtResource("1_c05l0")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
-transform = Transform3D(4.97842, 0, 0, 0, 4.97842, 0, 0, 0, 4.97842, 0, 0, 0)
+[node name="Spawner" type="Node3D" parent="."]
+process_mode = 1
+script = ExtResource("2_wd7oh")
+
+[node name="Arena" type="CSGSphere3D" parent="."]
+process_mode = 1
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 flip_faces = true
+radius = 5.0
 smooth_faces = false
 material = SubResource("ShaderMaterial_j6ynk")
+script = ExtResource("3_r10hw")
 
 [node name="Player" parent="." instance=ExtResource("1_kxres")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0586731, 0, 0.22826)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false
+light_energy = 5.0
 
 [node name="Pause_Menu" parent="." instance=ExtResource("2_a4n1s")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.975041, 0.222025, 0, -0.222025, 0.975041, 0, 1.54518, 3.40798)

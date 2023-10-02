@@ -3,6 +3,7 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 func _input(event : InputEvent):
 	var paused = get_tree().paused
@@ -14,6 +15,7 @@ func _input(event : InputEvent):
 		else:
 			$Pause_Menu.hide()
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		get_tree().paused = !paused
 		
 	
@@ -23,3 +25,9 @@ func _process(delta):
 
 func get_sens():
 	return $Pause_Menu/HSlider.value
+
+func get_arena_radius():
+	return $Arena.radius
+	
+func set_fov(v):
+	$Player/Camera3D.fov = v

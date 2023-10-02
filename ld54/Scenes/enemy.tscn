@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://hybkh13lqa1n"]
+
+[ext_resource type="Shader" path="res://scripts/enemy.gdshader" id="1_enrqw"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_plki8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_b6o35"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mjwyy"]
+render_priority = 0
+shader = ExtResource("1_enrqw")
+
+[sub_resource type="SphereMesh" id="SphereMesh_wshb2"]
+material = SubResource("ShaderMaterial_mjwyy")
+
+[node name="Enemy" type="Node3D"]
+script = ExtResource("1_plki8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(0.03, 0, 0, 0, 0.03, 0, 0, 0, 0.03, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+shape = SubResource("SphereShape3D_b6o35")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("SphereMesh_wshb2")
+skeleton = NodePath("")
+
+[connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]
