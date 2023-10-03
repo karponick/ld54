@@ -9,6 +9,7 @@ void fragment() {
 	color.g = (sin(TIME * 6.0 + VERTEX.x * 10.0) + 1.0) * 0.5;
 	color.b = (sin(TIME * 7.0 + VERTEX.x * 10.0) + 1.0) * 0.5;
 	ALBEDO = color;
+	//ALBEDO = vec3(0, 0, 0);
 	ROUGHNESS = 0.5;
 	METALLIC = 1.0;
 }

@@ -38,7 +38,7 @@ light_energy = 5.0
 [node name="Pause_Menu" parent="." instance=ExtResource("2_a4n1s")]
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.177875, 0.984053, 0, -0.984053, 0.177875, 0, 1.54518, 0.246563)
+transform = Transform3D(1, 0, 0, 0, 0.986606, 0.163119, 0, -0.163119, 0.986606, 0, 0.822178, 2.0414)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -66,28 +66,35 @@ scale = Vector2(5, 5)
 text = "GAME OVER"
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect"]
-layout_mode = 0
-offset_left = 463.0
-offset_top = 433.0
-offset_right = 687.0
-offset_bottom = 534.0
-color = Color(0.360784, 0.360784, 0.360784, 1)
-
-[node name="Button" type="Button" parent="ColorRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -109.0
-offset_top = 113.0
-offset_right = -37.0
-offset_bottom = 144.0
+offset_left = -113.0
+offset_top = 110.0
+offset_right = 111.0
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.360784, 0.360784, 0.360784, 1)
+
+[node name="Button" type="Button" parent="ColorRect/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.0
+offset_top = -47.5
+offset_right = -36.0
+offset_bottom = -16.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(3, 3)
 text = "Restart?"
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
-[connection signal="pressed" from="ColorRect/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ColorRect/ColorRect/Button" to="." method="_on_button_pressed"]

@@ -127,7 +127,8 @@ offset_right = 182.0
 offset_bottom = 234.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Move Mouse : Look Around
+text = "Escape : Pause
+Move Mouse : Look Around
 Left Click Mouse : Shoot
 
 Balls spawn every second
